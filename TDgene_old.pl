@@ -70,8 +70,8 @@ my $gff = shift;
 open LOG,">monitor.log" or die $!;
 if($step =~ /1/){
 	print LOG "STEP1 Begin at:\t".`date`."\n";
-	`makeblastdb -in $pep -dbtype prot`;
-	`blastp -query $pep -db $pep -outfmt 6 -evalue $evalue -out blast.result -num_threads 20`;
+	`/blast-2.2.26/bin/formatdb -i $pep -p T`;
+	`/blast-2.2.26/bin/blastall -p blastp -i $pep -d $pep -m 8 -e $evalue -o blast.result`;
 	print LOG "STEP1 End at:\t".`date`."\n";
 }
 
